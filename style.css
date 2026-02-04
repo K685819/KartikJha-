@@ -18,8 +18,7 @@
   --radius: 18px;
 }
 
-*{ box-sizing:border-box;
-  overflow-x: hidden;}
+*{ box-sizing:border-box;}
 
 html,body{
   height:100%;
@@ -571,6 +570,7 @@ footer p{
     transform: translateY(-6px);
   }
 }
+
 
 
 
