@@ -571,9 +571,9 @@ footer p{
   }
 }
 /* ====== MOBILE OVERFLOW FIX ====== */
-html, body{
+/* html, body{
   overflow-x: hidden;
-}
+} */
 
 .experience-item,
 .card-brutalist{
@@ -604,6 +604,7 @@ html, body{
     padding-right: 0 !important;
   }
 }
+
 
 
 
