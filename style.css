@@ -1,295 +1,410 @@
-:root {
-    --primary-color: #39FF14;
-    --background-color: #F5F5F5;
-    --text-color: #111111;
-    --border-color: #111111;
+/* ===========================
+   NEW THEME: Glass + Gradient + Neon
+   Author: Kartik Jha Portfolio
+   =========================== */
+
+:root{
+  --bg: #070A12;
+  --bg2:#0B1020;
+  --card: rgba(255,255,255,0.06);
+  --card2: rgba(255,255,255,0.08);
+  --stroke: rgba(255,255,255,0.14);
+  --text: #EAF0FF;
+  --muted: rgba(234,240,255,0.72);
+  --accent: #7C5CFF;
+  --accent2:#18E7FF;
+  --accent3:#39FF14; /* your old neon - kept as option */
+  --shadow: 0 18px 55px rgba(0,0,0,0.45);
+  --radius: 18px;
 }
 
-body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    font-family: 'Work Sans', sans-serif;
-    cursor: none;
+*{ box-sizing:border-box; }
+
+html,body{
+  height:100%;
+  scroll-behavior:smooth;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
+body{
+  margin:0;
+  background:
+    radial-gradient(900px 600px at 10% 10%, rgba(124,92,255,0.25), transparent 55%),
+    radial-gradient(900px 600px at 90% 20%, rgba(24,231,255,0.18), transparent 55%),
+    radial-gradient(700px 500px at 40% 90%, rgba(57,255,20,0.10), transparent 55%),
+    linear-gradient(180deg, var(--bg), var(--bg2));
+  color: var(--text);
+  font-family: "Work Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  overflow-x:hidden;
 }
 
-a, button {
-    cursor: none;
+a{ text-decoration:none; color:inherit; }
+img{ max-width:100%; display:block; }
+
+.container{ position:relative; z-index:2; }
+
+/* ---------- Cursor (optional, if your JS uses these) ---------- */
+.cursor-ring{
+  position:fixed;
+  width:34px;height:34px;
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:999px;
+  pointer-events:none;
+  z-index:9999;
+  backdrop-filter: blur(6px);
+  transform: translate(-50%,-50%);
+  transition: transform .08s linear, width .2s ease, height .2s ease, border-color .2s ease;
+}
+.cursor-dot{
+  position:fixed;
+  width:6px;height:6px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius:999px;
+  pointer-events:none;
+  z-index:9999;
+  transform: translate(-50%,-50%);
 }
 
-.cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1060; 
-    pointer-events: none;
-    transition: transform 0.2s ease-out;
-    display: none;
-}
-@media (pointer: fine) {
-    .cursor {
-        display: block;
-    }
-}
-.cursor-dot {
-    width: 8px;
-    height: 8px;
-    background-color: var(--text-color);
-    border-radius: 50%;
-}
-.cursor-ring {
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--text-color);
-    border-radius: 50%;
-    transform: translate(-16px, -16px);
-}
-body.cursor-hover .cursor-ring {
-    transform: translate(-16px, -16px) scale(1.5);
-    background-color: rgba(57, 255, 20, 0.3);
-}
-body.cursor-hover .cursor-dot {
-    background-color: var(--primary-color);
+/* ---------- Navbar ---------- */
+.navbar{
+  background: rgba(10,14,28,0.60) !important;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
 }
 
-.btn-custom {
-    font-family: 'Space Mono', monospace;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: 2px solid var(--border-color);
-    border-radius: 0;
-    padding: 12px 30px;
-    font-weight: 700;
-    text-transform: uppercase;
-    box-shadow: 6px 6px 0 var(--border-color);
-    transition: all 0.2s ease-in-out;
-}
-.btn-custom:hover {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    box-shadow: 3px 3px 0 var(--border-color);
-    transform: translate(3px, 3px);
+.navbar .navbar-brand{
+  font-family: "Space Mono", monospace;
+  letter-spacing: 1px;
+  color: var(--text) !important;
 }
 
-.navbar {
-    background-color: var(--background-color);
-    border-bottom: 2px solid var(--border-color);
-    padding: 1rem 0;
-}
-.navbar-brand {
-    font-family: 'Space Mono', monospace;
-    font-size: 1.5rem;
-}
-.navbar-toggler {
-    border: 2px solid var(--text-color);
-    border-radius: 0;
-}
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2817, 17, 17, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+.navbar .nav-link{
+  color: rgba(234,240,255,0.76) !important;
+  font-weight: 600;
+  padding: .65rem 1rem !important;
+  position:relative;
 }
 
-/* === Add this to your style.css === */
-
-#home {
-    /* This makes the #home section a positioning container */
-    position: relative;
-    overflow: hidden; /* Recommended */
+.navbar .nav-link::after{
+  content:"";
+  position:absolute;
+  left:16px;
+  bottom:8px;
+  width:0;
+  height:2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transition: width .25s ease;
+  border-radius: 999px;
 }
 
-#tsparticles-hero {
-    /* This positions the canvas */
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1; /* Behind the content */
+.navbar .nav-link:hover{
+  color: var(--text) !important;
+}
+.navbar .nav-link:hover::after{
+  width: calc(100% - 32px);
 }
 
-#home .container {
-    /* This ensures your content stays on top */
-    position: relative;
-    z-index: 2; /* In front of the particles */
+/* ---------- Hero ---------- */
+#home{
+  min-height: 100vh;
+  display:flex;
+  align-items:center;
+  padding: 120px 0 90px;
+  position:relative;
 }
 
-#home {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-}
-#home h1 {
-    font-size: clamp(2.5rem, 10vw, 5.5rem);
-    line-height: 1.1;
-    font-weight: 700;
-}
-#home #typed-text {
-    color: var(--primary-color);
-    -webkit-text-stroke: 2px var(--text-color);
-}
-.hero-socials a {
-    color: var(--text-color);
-    font-size: 2rem;
-    margin: 0 1rem;
-    text-decoration: none;
-    transition: all 0.2s ease-in-out;
-}
-.hero-socials a:hover {
-    color: var(--primary-color);
-    transform: scale(1.2);
+#tsparticles-hero{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  opacity:0.55;
 }
 
-.profile-pic {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border: 2px solid var(--border-color);
-    box-shadow: 10px 10px 0 var(--border-color);
-    transition: all 0.2s ease-in-out;
-}
-.profile-pic:hover {
-    box-shadow: 4px 4px 0 var(--primary-color);
-    transform: translate(6px, 6px);
-    border-color: var(--primary-color);
+#home h1{
+  font-family:"Space Mono", monospace;
+  font-weight:700;
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
+  line-height: 1.12;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  text-shadow: 0 10px 40px rgba(0,0,0,0.45);
 }
 
-.col-lg-8 {
-    margin-top: 20px;
+#home h1 span#typed-text{
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.card-brutalist {
-    background-color: #fff;
-    border: 2px solid var(--border-color);
-    border-radius: 0;
-    box-shadow: 10px 10px 0 var(--border-color);
-    transition: all 0.2s ease-in-out;
-    height: 100%;
-}
-.card-brutalist:hover {
-    box-shadow: 4px 4px 0 var(--primary-color);
-    transform: translate(6px, 6px);
-    border-color: var(--primary-color);
+/* ---------- Buttons ---------- */
+.btn-custom{
+  border: 1px solid rgba(255,255,255,0.16);
+  background: linear-gradient(135deg, rgba(124,92,255,0.20), rgba(24,231,255,0.12));
+  color: var(--text);
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  box-shadow: 0 16px 45px rgba(0,0,0,0.35);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 
-.skills-marquee {
-    overflow-x: auto;
-    padding: 3rem 0;
-    background-color: var(--primary-color);
-    border-top: 2px solid var(--border-color);
-    border-bottom: 2px solid var(--border-color);
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-.skills-marquee::-webkit-scrollbar {
-    display: none;
-}
-.marquee-content {
-    display: flex;
-    width: max-content;
-    animation: marquee 30s linear infinite;
-}
-.skills-marquee:hover .marquee-content,
-.skills-marquee:focus-within .marquee-content {
-     animation-play-state: paused;
-}
-.skill-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 2rem;
-    font-weight: 700;
-    padding: 0 2rem;
-    flex-shrink: 0;
-    white-space: nowrap;
-}
-.skill-tag::after {
-    content: "•";
-    margin-left: 4rem;
-}
-@keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+.btn-custom:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.26);
+  box-shadow: 0 22px 60px rgba(0,0,0,0.55);
 }
 
-section {
-    padding: 120px 0;
-    overflow: hidden;
-}
-.section-title {
-     display: inline-block;
-     border: 2px solid var(--border-color);
-     padding: 10px 20px;
-     background-color: var(--primary-color);
-     margin-bottom: 4rem;
+/* Your modal close custom button already exists inline; keep it */
+
+/* ---------- Socials ---------- */
+.hero-socials a{
+  width: 44px;
+  height: 44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius: 999px;
+  margin: 0 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: transform .18s ease, background .18s ease, border-color .18s ease;
 }
 
-.experience-item {
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 2rem;
-    margin-bottom: 2rem;
-}
-.experience-item:last-child {
-    border-bottom: 0;
-    margin-bottom: 0;
-}
-.experience-item .meta {
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
+.hero-socials a:hover{
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.08);
 }
 
-.contact-form input, .contact-form textarea {
-    font-family: 'Work Sans', sans-serif;
-    background-color: #fff;
-    border: 2px solid var(--border-color);
-    border-radius: 0;
-    padding: 15px;
-    margin-bottom: 1rem;
-    box-shadow: 5px 5px 0 var(--border-color);
-}
-.contact-form input:focus, .contact-form textarea:focus {
-    box-shadow: 2px 2px 0 var(--border-color);
-    transform: translate(3px, 3px);
-    outline: none;
+.hero-socials i{
+  font-size: 18px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color: transparent;
 }
 
-.social-links a {
-    text-decoration: none;
-    font-size: 1.8rem;
-    margin: 0 0.75rem;
-    transition: all 0.2s ease-in-out;
-}
-#contact .social-links a, footer .social-links a:hover {
-    color: var(--text-color);
-}
-#contact .social-links a:hover, footer .social-links a {
-    color: var(--primary-color);
-    transform: scale(1.1);
-}
-footer {
-    background-color: var(--text-color);
-    color: var(--background-color);
-    padding: 3rem 0;
-    font-weight: 600;
+/* ---------- Sections ---------- */
+section{
+  padding: 90px 0;
 }
 
-.modal-content {
-    border-radius: 0;
-    border: 2px solid var(--border-color);
-    background-color: var(--background-color);
+.section-title{
+  font-family: "Space Mono", monospace;
+  letter-spacing: 2px;
+  font-size: 1.7rem;
+  margin-bottom: 45px;
+  display:inline-block;
+  position:relative;
 }
-.modal-header, .modal-footer {
-    border-color: var(--border-color);
+
+.section-title::after{
+  content:"";
+  display:block;
+  width: 70%;
+  height: 3px;
+  margin: 12px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  opacity: 0.9;
 }
-.modal-title {
-     font-family: 'Space Mono', monospace;
+
+.bg-white{
+  /* override your old white sections into glass dark */
+  background: transparent !important;
 }
-.tech-badge {
-    display: inline-block;
-    background-color: var(--primary-color);
-    border: 2px solid var(--border-color);
-    padding: 5px 10px;
-    margin: 3px;
-    font-size: 0.9rem;
-    font-weight: 600;
+
+/* ---------- About ---------- */
+.profile-pic{
+  width: 240px;
+  height: 240px;
+  border-radius: 24px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: var(--shadow);
+}
+
+#about p{
+  color: var(--muted);
+}
+
+/* ---------- Skills Marquee ---------- */
+.skills-marquee{
+  overflow:hidden;
+  padding: 18px 0;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(10px);
+}
+
+.marquee-content{
+  display:flex;
+  gap: 14px;
+  width: max-content;
+  animation: marquee 18s linear infinite;
+  padding-left: 20px;
+}
+
+@keyframes marquee{
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.skill-tag{
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(234,240,255,0.82);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ---------- Experience ---------- */
+.experience-item{
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  padding: 22px 22px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+}
+
+.experience-item h3{
+  margin:0 0 6px;
+  font-family:"Space Mono", monospace;
+}
+
+.experience-item .meta{
+  color: rgba(234,240,255,0.65);
+  margin-bottom: 10px;
+}
+
+.experience-item p{
+  color: rgba(234,240,255,0.80);
+  margin:0;
+}
+
+/* ---------- Projects Cards ---------- */
+.card-brutalist{
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  position:relative;
+}
+
+.card-brutalist::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background: linear-gradient(135deg, rgba(124,92,255,0.28), rgba(24,231,255,0.18), rgba(57,255,20,0.10));
+  filter: blur(22px);
+  opacity: 0.55;
+  z-index:0;
+}
+
+.card-brutalist .card-body{
+  position:relative;
+  z-index:1;
+}
+
+.card-title{
+  font-family:"Space Mono", monospace;
+  margin-bottom: 10px;
+}
+
+.card-text{
+  color: rgba(234,240,255,0.75);
+}
+
+/* Badges */
+.badge{
+  border-radius: 999px !important;
+  padding: 8px 12px !important;
+  background: rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+/* ---------- Contact ---------- */
+.contact-form{
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.contact-form .form-control{
+  background: rgba(8,12,24,0.65);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text);
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.contact-form .form-control:focus{
+  box-shadow: none;
+  border-color: rgba(24,231,255,0.55);
+  outline: none;
+}
+
+.contact-form ::placeholder{
+  color: rgba(234,240,255,0.55);
+}
+
+/* ---------- Footer ---------- */
+footer{
+  padding: 50px 0;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  background: rgba(10,14,28,0.55);
+  backdrop-filter: blur(14px);
+}
+
+footer p{
+  color: rgba(234,240,255,0.65);
+}
+
+/* ---------- Modal Theme ---------- */
+.modal-content{
+  background: rgba(10,14,28,0.92);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+}
+
+.modal-header{
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.modal-footer{
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+
+.btn-close{
+  filter: invert(1);
+}
+
+/* Tech badges */
+.tech-badge{
+  display:inline-block;
+  margin: 6px 6px 0 0;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(234,240,255,0.85);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 991px){
+  #home{ padding-top: 110px; }
+  .profile-pic{ width: 210px; height: 210px; }
 }
