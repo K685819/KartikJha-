@@ -570,6 +570,41 @@ footer p{
     transform: translateY(-6px);
   }
 }
+/* ====== MOBILE OVERFLOW FIX ====== */
+html, body{
+  overflow-x: hidden;
+}
+
+.experience-item,
+.card-brutalist{
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Prevent any long text from breaking layout */
+.experience-item p,
+.card-text,
+.meta{
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Mobile container padding */
+@media (max-width: 576px){
+  .container{
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  #experience .col-12,
+  #projects .col-lg-6{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
 
 
 
