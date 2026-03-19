@@ -1,427 +1,756 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kartik Jha | Web Developer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111111' rx='12'></rect><text x='50' y='55' font-family='Space Mono, monospace' font-size='65' font-weight='700' fill='%2339FF14' text-anchor='middle' dominant-baseline='middle'>KJ</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&family=Work+Sans:wght@400;600&display=swap"
-        rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kartik Kumar — Web Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════
+   TOKENS
+═══════════════════════════════════ */
+:root{
+  --bg:       #0d0f0e;
+  --surface:  #131614;
+  --border:   rgba(255,255,255,0.07);
+  --accent:   #39ff8f;
+  --accent-d: #1ed66a;
+  --text:     #e8ede9;
+  --muted:    rgba(232,237,233,0.45);
+  --tag-bg:   rgba(57,255,143,0.08);
+  --radius:   10px;
+  --f-head:   'Bebas Neue',sans-serif;
+  --f-body:   'Bricolage Grotesque',sans-serif;
+  --f-mono:   'JetBrains Mono',monospace;
+}
 
-    <link rel="stylesheet" href="style.css">
+/* ═══════════════════════════════════
+   RESET + BASE
+═══════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--f-body);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
 
-    <style>
-        .btn-close-custom {
-            background: transparent;
-            border: 2px solid #000;
-            /* Bold Black Border */
-            color: #000;
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-radius: 0;
-            /* Sharp corners for brutalist look */
-            padding: 0.5rem 1.5rem;
-            transition: all 0.2s ease;
-        }
+/* scrollbar */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
 
-        .btn-close-custom:hover {
-            background: #000;
-            color: #fff;
-            transform: translateY(-3px);
-            /* Moves up slightly on hover */
-            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
-            /* Adds a shadow */
-        }
-    </style>
+/* ═══════════════════════════════════
+   NOISE OVERLAY
+═══════════════════════════════════ */
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.03;
+  mix-blend-mode:overlay;
+}
+
+/* ═══════════════════════════════════
+   NAV
+═══════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:60px;
+  background:rgba(13,15,14,0.82);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:background .4s;
+}
+.nav-logo{
+  font-family:var(--f-head);
+  font-size:1.5rem;letter-spacing:.08em;
+  color:var(--text);
+}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:6px}
+.nav-links a{
+  padding:5px 14px;border-radius:999px;
+  font-size:.78rem;letter-spacing:.06em;
+  color:var(--muted);
+  border:1px solid transparent;
+  transition:color .2s,border-color .2s,background .2s;
+}
+.nav-links a:hover{color:var(--accent);border-color:rgba(57,255,143,.25);background:rgba(57,255,143,.05)}
+.nav-cta{
+  padding:7px 18px;border-radius:999px;
+  background:var(--accent);color:#0d0f0e;
+  font-size:.78rem;font-weight:700;letter-spacing:.05em;
+  transition:background .2s,transform .15s,box-shadow .2s;
+}
+.nav-cta:hover{background:#5cffaa;transform:translateY(-1px);box-shadow:0 6px 24px rgba(57,255,143,.3)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+.mobile-menu{display:none;flex-direction:column;gap:0;background:#131614;border-bottom:1px solid var(--border)}
+.mobile-menu a{padding:14px 6%;font-size:.9rem;border-bottom:1px solid var(--border);color:var(--muted)}
+.mobile-menu a:hover{color:var(--accent);background:rgba(57,255,143,.04)}
+.mobile-menu.open{display:flex}
+
+/* ═══════════════════════════════════
+   HERO
+═══════════════════════════════════ */
+#hero{
+  min-height:100dvh;
+  display:flex;align-items:center;justify-content:center;
+  padding:100px 5% 60px;
+  position:relative;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;top:-10%;left:-10%;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle, rgba(57,255,143,.10) 0%, transparent 65%);
+  animation:driftGlow 8s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes driftGlow{
+  from{transform:translate(0,0) scale(1)}
+  to  {transform:translate(120px,60px) scale(1.15)}
+}
+.hero-inner{
+  max-width:1100px;width:100%;
+  display:grid;grid-template-columns:1fr auto;align-items:center;gap:60px;
+}
+.hero-text{}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(57,255,143,.08);
+  border:1px solid rgba(57,255,143,.2);
+  border-radius:999px;
+  padding:5px 14px;
+  font-family:var(--f-mono);font-size:.68rem;
+  color:var(--accent);letter-spacing:.12em;
+  margin-bottom:28px;
+}
+.hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+.hero-name{
+  font-family:var(--f-head);
+  font-size:clamp(4rem,11vw,10rem);
+  line-height:.9;letter-spacing:.02em;
+  color:var(--text);
+  margin-bottom:8px;
+}
+.hero-name .line2{
+  -webkit-text-stroke:1px rgba(232,237,233,.25);
+  color:transparent;
+  display:block;
+}
+.hero-title{
+  font-family:var(--f-mono);
+  font-size:clamp(.8rem,1.8vw,1rem);
+  color:var(--accent);letter-spacing:.12em;
+  margin-bottom:24px;
+}
+.hero-summary{
+  font-size:clamp(.88rem,1.5vw,.98rem);
+  color:var(--muted);max-width:540px;
+  line-height:1.75;margin-bottom:36px;
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 26px;border-radius:999px;
+  background:var(--accent);color:#0d0f0e;
+  font-weight:700;font-size:.88rem;
+  transition:background .2s,transform .15s,box-shadow .2s;
+}
+.btn-primary:hover{background:#5cffaa;transform:translateY(-2px);box-shadow:0 8px 30px rgba(57,255,143,.3)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 26px;border-radius:999px;
+  border:1px solid var(--border);color:var(--muted);
+  font-size:.88rem;
+  transition:border-color .2s,color .2s;
+}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Avatar stack */
+.hero-visual{
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+  position:relative;
+}
+.avatar-ring{
+  width:180px;height:180px;border-radius:50%;
+  border:1px solid rgba(57,255,143,.2);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  animation:rotateSlow 20s linear infinite;
+}
+.avatar-ring::before{
+  content:'';position:absolute;inset:-1px;border-radius:50%;
+  background:conic-gradient(var(--accent) 0deg, transparent 120deg, transparent 240deg, var(--accent) 360deg);
+  -webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 2px),#000 0);
+  opacity:.5;
+}
+@keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.avatar-inner{
+  position:absolute;inset:8px;border-radius:50%;
+  background:linear-gradient(135deg,#1a2520,#0d1710);
+  display:flex;align-items:center;justify-content:center;
+  animation:rotateSlow 20s linear infinite reverse;/* counter-rotate so initials stay still */
+}
+.avatar-initials{
+  font-family:var(--f-head);font-size:3.2rem;
+  color:var(--accent);letter-spacing:.04em;
+  line-height:1;
+}
+.stat-chips{display:flex;gap:10px}
+.s-chip{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:10px 16px;text-align:center;
+}
+.s-chip .n{font-family:var(--f-head);font-size:1.5rem;color:var(--accent)}
+.s-chip .l{font-family:var(--f-mono);font-size:.58rem;color:var(--muted);letter-spacing:.1em;display:block}
+
+/* scroll hint */
+.scroll-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-family:var(--f-mono);font-size:.6rem;letter-spacing:.14em;color:var(--muted);
+}
+.scroll-track{width:1px;height:40px;background:rgba(255,255,255,.12);overflow:hidden;position:relative}
+.scroll-tick{position:absolute;top:-6px;width:1px;height:6px;background:var(--accent);animation:scrollTick 1.5s ease-in-out infinite}
+@keyframes scrollTick{0%{top:-6px;opacity:1}80%{top:40px;opacity:.3}100%{top:-6px;opacity:0}}
+
+/* ═══════════════════════════════════
+   SECTION COMMONS
+═══════════════════════════════════ */
+section{padding:100px 5%;position:relative;z-index:1}
+.section-label{
+  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.16em;
+  color:var(--accent);margin-bottom:14px;
+}
+.section-title{
+  font-family:var(--f-head);
+  font-size:clamp(2.6rem,6vw,5.5rem);
+  line-height:.95;color:var(--text);
+  margin-bottom:56px;
+}
+.section-title span{
+  -webkit-text-stroke:1px rgba(232,237,233,.2);
+  color:transparent;
+}
+.divider{width:100%;height:1px;background:var(--border);margin:0}
+
+/* reveal animation */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.show{opacity:1;transform:translateY(0)}
+
+/* ═══════════════════════════════════
+   SKILLS
+═══════════════════════════════════ */
+#skills{background:var(--surface)}
+.skills-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.skill-group{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:14px;padding:26px;
+  transition:border-color .3s,transform .3s;
+}
+.skill-group:hover{border-color:rgba(57,255,143,.3);transform:translateY(-4px)}
+.sg-label{
+  font-family:var(--f-mono);font-size:.62rem;letter-spacing:.14em;
+  color:var(--accent);margin-bottom:16px;
+}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{
+  background:var(--tag-bg);border:1px solid rgba(57,255,143,.14);
+  border-radius:6px;padding:5px 12px;
+  font-size:.78rem;color:var(--text);
+  transition:background .2s,border-color .2s;
+}
+.tag:hover{background:rgba(57,255,143,.15);border-color:rgba(57,255,143,.3)}
+
+/* ═══════════════════════════════════
+   EXPERIENCE
+═══════════════════════════════════ */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{
+  display:grid;grid-template-columns:140px 1fr;
+  gap:0 40px;position:relative;
+}
+.tl-item::before{/* vertical line */
+  content:'';
+  position:absolute;left:139px;top:16px;bottom:0;
+  width:1px;background:var(--border);
+}
+.tl-item:last-child::before{display:none}
+.tl-date{
+  font-family:var(--f-mono);font-size:.72rem;
+  color:var(--muted);letter-spacing:.06em;
+  padding-top:14px;text-align:right;padding-right:28px;
+  line-height:1.4;white-space:nowrap;
+}
+.tl-body{
+  padding:0 0 52px 28px;
+  position:relative;
+}
+.tl-body::before{/* dot */
+  content:'';
+  position:absolute;left:-5px;top:16px;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 3px rgba(57,255,143,.15),0 0 0 6px rgba(57,255,143,.05);
+}
+.tl-company{
+  font-family:var(--f-head);font-size:1.45rem;
+  color:var(--text);letter-spacing:.03em;line-height:1;
+  margin-bottom:4px;
+}
+.tl-role{
+  font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;
+  color:var(--accent);margin-bottom:16px;
+}
+.tl-bullets{display:flex;flex-direction:column;gap:8px}
+.tl-bullets li{
+  display:flex;gap:10px;
+  font-size:.88rem;color:var(--muted);line-height:1.55;
+}
+.tl-bullets li::before{
+  content:'→';color:var(--accent);
+  font-family:var(--f-mono);font-size:.75rem;
+  margin-top:2px;flex-shrink:0;
+}
+
+/* ═══════════════════════════════════
+   PROJECTS
+═══════════════════════════════════ */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.proj-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;padding:32px;
+  transition:border-color .3s,transform .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.proj-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.proj-card:hover{border-color:rgba(57,255,143,.25);transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
+.proj-card:hover::before{opacity:1}
+.proj-num{
+  font-family:var(--f-mono);font-size:.62rem;color:var(--accent);
+  letter-spacing:.1em;margin-bottom:18px;
+}
+.proj-name{
+  font-family:var(--f-head);font-size:1.6rem;letter-spacing:.02em;
+  color:var(--text);margin-bottom:6px;line-height:1;
+}
+.proj-year{
+  font-family:var(--f-mono);font-size:.65rem;color:var(--muted);
+  margin-bottom:18px;
+}
+.proj-desc{display:flex;flex-direction:column;gap:8px}
+.proj-desc li{
+  display:flex;gap:10px;font-size:.85rem;color:var(--muted);line-height:1.55;
+}
+.proj-desc li::before{content:'·';color:var(--accent);flex-shrink:0;font-size:1rem}
+
+/* ═══════════════════════════════════
+   EDUCATION
+═══════════════════════════════════ */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.edu-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;padding:30px;
+  transition:border-color .3s,transform .3s;
+}
+.edu-card:hover{border-color:rgba(57,255,143,.25);transform:translateY(-3px)}
+.edu-badge{
+  display:inline-block;
+  background:rgba(57,255,143,.08);border:1px solid rgba(57,255,143,.18);
+  border-radius:6px;padding:3px 10px;
+  font-family:var(--f-mono);font-size:.6rem;letter-spacing:.1em;color:var(--accent);
+  margin-bottom:16px;
+}
+.edu-inst{
+  font-family:var(--f-head);font-size:1.3rem;letter-spacing:.02em;
+  color:var(--text);margin-bottom:4px;line-height:1.1;
+}
+.edu-degree{font-size:.85rem;color:var(--muted);margin-bottom:14px}
+.edu-points{display:flex;flex-direction:column;gap:7px}
+.edu-points li{display:flex;gap:8px;font-size:.8rem;color:var(--muted);line-height:1.5}
+.edu-points li::before{content:'—';color:var(--accent);font-family:var(--f-mono);flex-shrink:0}
+
+/* ═══════════════════════════════════
+   CONTACT
+═══════════════════════════════════ */
+#contact{background:var(--surface)}
+.contact-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+}
+.contact-text h2{
+  font-family:var(--f-head);font-size:clamp(2.4rem,6vw,5rem);
+  line-height:.95;color:var(--text);margin-bottom:18px;
+}
+.contact-text h2 em{
+  -webkit-text-stroke:1px rgba(232,237,233,.2);
+  color:transparent;font-style:normal;
+}
+.contact-text p{color:var(--muted);font-size:.9rem;max-width:380px;line-height:1.7}
+.contact-links{display:flex;flex-direction:column;gap:14px}
+.c-link{
+  display:flex;align-items:center;gap:16px;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:12px;padding:18px 22px;
+  transition:border-color .25s,transform .2s;
+}
+.c-link:hover{border-color:rgba(57,255,143,.35);transform:translateX(5px)}
+.c-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:rgba(57,255,143,.08);border:1px solid rgba(57,255,143,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-mono);font-size:.65rem;color:var(--accent);
+  flex-shrink:0;
+}
+.c-info .label{font-family:var(--f-mono);font-size:.6rem;color:var(--muted);letter-spacing:.1em}
+.c-info .value{font-size:.9rem;color:var(--text);margin-top:2px}
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+footer{
+  padding:32px 5%;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.foot-logo{font-family:var(--f-head);font-size:1.2rem;letter-spacing:.08em}
+.foot-logo span{color:var(--accent)}
+footer p{font-family:var(--f-mono);font-size:.65rem;color:var(--muted);letter-spacing:.08em}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+  .hero-visual{order:-1}
+  .hero-actions{justify-content:center}
+  .hero-summary{margin:0 auto 36px}
+  .tl-item{grid-template-columns:1fr;gap:0}
+  .tl-item::before{left:12px;top:38px}
+  .tl-date{text-align:left;padding:0 0 0 40px;padding-top:0;margin-bottom:4px;font-size:.65rem}
+  .tl-body{padding:0 0 40px 40px}
+  .tl-body::before{left:-5px;top:4px}
+  .contact-inner{grid-template-columns:1fr;gap:40px}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .hamburger{display:flex}
+  section{padding:72px 5%}
+}
+@media(max-width:560px){
+  .stat-chips{flex-direction:column}
+  .avatar-ring{width:140px;height:140px}
+  .avatar-initials{font-size:2.4rem}
+}
+</style>
 </head>
-
 <body>
 
-    <div class="cursor cursor-ring"></div>
-    <div class="cursor cursor-dot"></div>
+<!-- ── NAV ── -->
+<nav id="nav">
+  <div class="nav-logo">KK<span>.</span></div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="mailto:kartikkumar3726@gmail.com" class="nav-cta">Hire Me</a>
+  <div class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#skills"     onclick="closeMob()">Skills</a>
+  <a href="#experience" onclick="closeMob()">Experience</a>
+  <a href="#projects"   onclick="closeMob()">Projects</a>
+  <a href="#education"  onclick="closeMob()">Education</a>
+  <a href="#contact"    onclick="closeMob()">Contact</a>
+  <a href="mailto:kartikkumar3726@gmail.com" onclick="closeMob()" style="color:var(--accent)">Hire Me →</a>
+</div>
 
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">KARTIK JHA</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto text-center">
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects">Work</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
-            </div>
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">AVAILABLE FOR WORK</div>
+      <h1 class="hero-name">
+        Kartik<span class="line2">Kumar</span>
+      </h1>
+      <p class="hero-title">// Web Developer</p>
+      <p class="hero-summary">Building responsive, SEO-friendly websites with HTML, CSS, JavaScript, PHP, MySQL, Bootstrap &amp; React.js. Turning ideas into pixel-perfect, performant digital experiences.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View Projects ↓</a>
+        <a href="#contact"  class="btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="avatar-ring">
+        <div class="avatar-inner">
+          <span class="avatar-initials">KK</span>
         </div>
-    </nav>
+      </div>
+      <div class="stat-chips">
+        <div class="s-chip"><div class="n">2+</div><span class="l">ROLES</span></div>
+        <div class="s-chip"><div class="n">2</div><span class="l">PROJECTS</span></div>
+        <div class="s-chip"><div class="n">10+</div><span class="l">SKILLS</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-track"><div class="scroll-tick"></div></div>
+    SCROLL
+  </div>
+</section>
 
-    <section id="home">
-        <div id="tsparticles-hero"></div>
+<hr class="divider"/>
 
-        <div class="container text-center">
-            <h1 data-aos="fade-up">
-                Building Impressive <br>Digital Experiences <span id="typed-text"></span>
-            </h1>
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <p class="section-label reveal">// 01 — SKILLS</p>
+  <h2 class="section-title reveal">Tech <span>Stack</span></h2>
+  <div class="skills-grid">
+    <div class="skill-group reveal" style="--d:.05s">
+      <p class="sg-label">LANGUAGES</p>
+      <div class="tags">
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">PHP</span>
+        <span class="tag">MySQL</span>
+      </div>
+    </div>
+    <div class="skill-group reveal" style="--d:.12s">
+      <p class="sg-label">FRAMEWORKS &amp; LIBRARIES</p>
+      <div class="tags">
+        <span class="tag">React.js</span>
+        <span class="tag">Bootstrap</span>
+      </div>
+    </div>
+    <div class="skill-group reveal" style="--d:.19s">
+      <p class="sg-label">WEB DEVELOPMENT</p>
+      <div class="tags">
+        <span class="tag">Responsive Design</span>
+        <span class="tag">Dynamic Pages</span>
+        <span class="tag">Form Integration</span>
+        <span class="tag">SEO Optimization</span>
+        <span class="tag">Performance Optimization</span>
+      </div>
+    </div>
+    <div class="skill-group reveal" style="--d:.26s">
+      <p class="sg-label">TOOLS</p>
+      <div class="tags">
+        <span class="tag">Git</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">VS Code</span>
+        <span class="tag">Chrome DevTools</span>
+      </div>
+    </div>
+  </div>
+</section>
 
+<hr class="divider"/>
 
-            <a href="#projects" class="btn btn-custom mt-3" data-aos="fade-up" data-aos-delay="400">View My Work</a>
-            <div class="hero-socials mt-5" data-aos="fade-up" data-aos-delay="600">
-                <a href="https://www.linkedin.com/in/kartik-kumar-64643a319" target="_blank"><i
-                        class="fa-brands fa-linkedin"></i></a>
-                <a href="https://github.com/K685819" target="_blank"><i class="fa-brands fa-github"></i></a>
-                <a href="https://www.instagram.com/kartik__0667?igsh=a2J5cGZ0eG8yazB4" target="_blank"><i
-                        class="fa-brands fa-instagram"></i></a>
-                <!-- <a href="https://discord.com/users/lazyboyharsh" target="_blank"><i class="fa-brands fa-discord"></i></a> -->
-            </div>
-        </div>
-    </section>
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <p class="section-label reveal">// 02 — EXPERIENCE</p>
+  <h2 class="section-title reveal">Work <span>History</span></h2>
+  <div class="timeline">
 
-    <section id="about" class="bg-white">
-        <div class="container">
-            <div class="text-center" data-aos="fade-up">
-                <h2 class="section-title">ABOUT ME</h2>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-lg-4 text-center" data-aos="fade-right">
-                    <img src="myportdp.png" alt="Harsh Jain" class="profile-pic">
-                </div>
-                <div class="col-lg-8" data-aos="fade-left">
-                    <p class="fs-5">Hello! I’m Kartik Jha, a passionate and motivated Web Developer with a strong
-                        interest in building modern, responsive, and user-friendly web applications. I enjoy turning
-                        ideas into real, functional websites using clean code and creative design. As a fresher, I am
-                        highly enthusiastic about learning new technologies and continuously improving my skills.
-                    </p>
-                    <p class="fs-5 mt-3">I have hands-on experience working with HTML, CSS, Bootstrap, JavaScript,
-                        React, PHP, and MySQL, and I have successfully completed multiple projects including e-commerce
-                        websites, blog platforms, and front-end web applications. I focus on creating websites that are
-                        not only visually appealing but also efficient, fast, and easy to use.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="skills-marquee">
-        <div class="marquee-content">
-            <span class="skill-tag">HTML & Advanced CSS</span>
-            <span class="skill-tag">JavaScript (ES6+)</span>
-            <span class="skill-tag">Bootstrap & Tailwind</span>
-            <span class="skill-tag">PHP&MY SQL</span>
-            <span class="skill-tag">Git & GitHub</span>
-            <span class="skill-tag">AI Tools & Prompting</span>
-
-            <span class="skill-tag">HTML & Advanced CSS</span>
-            <span class="skill-tag">JavaScript (ES6+)</span>
-            <span class="skill-tag">Bootstrap & Tailwind</span>
-            <span class="skill-tag">PHP&MY SQL</span>
-            <span class="skill-tag">Git & GitHub</span>
-            <span class="skill-tag">AI Tools & Prompting</span>
-        </div>
+    <div class="tl-item reveal">
+      <div class="tl-date">Jan 2026<br/>→ Present</div>
+      <div class="tl-body">
+        <div class="tl-company">EliteBandhan.com</div>
+        <div class="tl-role">WEB DEVELOPER INTERN</div>
+        <ul class="tl-bullets">
+          <li>Developed responsive website pages using HTML, CSS, JavaScript, PHP, and MySQL.</li>
+          <li>Built dynamic matrimonial pages including caste-based and country-based pages.</li>
+          <li>Improved website structure with on-page SEO optimization and better content organization.</li>
+          <li>Worked on contact forms, pricing pages, and dynamic content integration.</li>
+          <li>Fixed website bugs and improved responsiveness and performance across devices.</li>
+        </ul>
+      </div>
     </div>
 
-    <section id="experience">
-        <div class="container">
-            <div class="text-center" data-aos="fade-up">
-                <h2 class="section-title">EXPERIENCE</h2>
-            </div>
-            <div class="col-lg-8 mx-auto">
-                <div class="experience-item" data-aos="fade-up">
-                    <h3>Web Developer</h3>
-                    <p class="meta">Elite Bandhan.com | Jan 2026 - Present</p>
-                    <p>Designed and developed a modern, responsive multi-page website using HTML, Tailwind CSS,
-                        Bootstrap, JavaScript,Php & My SQL AOS animations to enhance user engagement and brand presence.</p>
-                </div>
-                <!-- <div class="experience-item" data-aos="fade-up" data-aos-delay="200">
-                    <h3>Web Developer Intern</h3> 
-                    <p class="meta">Pantech Ai (Remote) | May 2024 - Aug 2024</p> 
-                    <p>Developed responsive web applications using HTML, CSS, and JavaScript. Received regular training to enhance backend development and database integration skills.</p>
-                </div> -->
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="bg-white">
-        <div class="container">
-            <div class="text-center" data-aos="fade-up">
-                <h2 class="section-title">FEATURED PROJECTS</h2>
-            </div>
-            <div class="row">
-
-                <div class="col-lg-6 mb-5" data-aos="fade-right">
-                    <div class="card card-brutalist">
-                        <div class="card-body p-4">
-                            <h4 class="card-title">Elite bandhan Website</h4>
-                            <p class="card-text">Working as a Web Developer Intern, contributing to the development and
-                                maintenance of company websites.
-                                Built and optimized responsive web pages using HTML, CSS, Bootstrap, and JavaScript</p>
-                            <button class="btn btn-custom" data-bs-toggle="modal"
-                                data-bs-target="#project1Modal">Details</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 mb-5" data-aos="fade-left">
-                    <div class="card card-brutalist">
-                        <div class="card-body p-4">
-                            <h4 class="card-title">Weather Web</h4>
-                            <p class="card-text">A dynamic weather app using API data with a background that changes
-                                based on the weather.</p>
-                            <button class="btn btn-custom" data-bs-toggle="modal"
-                                data-bs-target="#project2Modal">Details</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 mb-5" data-aos="fade-right">
-                    <div class="card card-brutalist">
-                        <div class="card-body p-4">
-                            <h4 class="card-title">My Portfolio</h4>
-                            <!-- <span class="badge bg-dark text-white mb-2">Ecommerce</span> -->
-                            <p class="card-text">Made My Portfolio For Showing My Technical Skill Using Html CSS Java Script Web3 Form</p>
-                            <button class="btn btn-custom" data-bs-toggle="modal"
-                                data-bs-target="#project3Modal">Details</button>
-                        </div>
-                    </div>
-                </div>
-
-           <div class="col-lg-6 mb-5" data-aos="fade-left">
-                    <div class="card card-brutalist">
-                        <div class="card-body p-4">
-                            <h4 class="card-title">Stryd-Shoes Store</h4>
-                            <span class="badge bg-dark text-white mb-2">Stryd-Shoes Store</span>
-                            <p class="card-text">A responsive personal showcase site designed to highlight professional
-                                skills and creative projects.</p>
-                            <button class="btn btn-custom" data-bs-toggle="modal"
-                                data-bs-target="#project4Modal">Details</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- <div class="col-lg-6 mb-5" data-aos="fade-right">
-                    <div class="card card-brutalist">
-                        <div class="card-body p-4">
-                            <h4 class="card-title">Mrs Cutlery</h4>
-                            <span class="badge bg-dark text-white mb-2">Company Catalog</span>
-                            <p class="card-text">An elegant digital catalog for a cutlery brand, allowing customers to
-                                explore product collections.</p>
-                            <button class="btn btn-custom" data-bs-toggle="modal"
-                                data-bs-target="#project5Modal">Details</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 mb-5" data-aos="fade-left">
-                    <div class="card card-brutalist">
-                        <div class="card-body p-4">
-                            <h4 class="card-title">Namo Production</h4>
-                            <span class="badge bg-dark text-white mb-2">Company Profile</span>
-                            <p class="card-text">A corporate profile website for a production house, detailing services
-                                and portfolio highlights.</p>
-                            <button class="btn btn-custom" data-bs-toggle="modal"
-                                data-bs-target="#project6Modal">Details</button>
-                        </div>
-                    </div>
-                </div> 
-
-            </div>
-        </div> -->
-    </section>
-    <section id="contact">
-        <div class="container" data-aos="fade-up">
-            <div class="text-center">
-                <h2 class="section-title">GET IN TOUCH</h2>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" class="contact-form">
-                        <input type="hidden" name="apikey" value="43228d3f-2289-4c02-844f-cb1abf456a8d">
-                        <input id="formName" class="form-control" type="text" name="name" placeholder="Your Name"
-                            required>
-                        <input id="formEmail" class="form-control" type="email" name="email" placeholder="Your Email"
-                            required>
-                        <textarea id="formMessage" class="form-control" name="message" rows="4"
-                            placeholder="Your Message" required></textarea>
-                        <button type="submit" class="btn btn-custom">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container text-center">
-            <div class="social-links mb-3">
-                <div class="hero-socials mt-5" data-aos="fade-up" data-aos-delay="600">
-                    <a href="https://www.linkedin.com/in/kartik-kumar-64643a319" target="_blank"><i
-                            class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://github.com/Lazyboyharsh" target="_blank"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://www.instagram.com/kartik__0667?igsh=a2J5cGZ0eG8yazB4" target="_blank"><i
-                            class="fa-brands fa-instagram"></i></a>
-                </div>
-                <p class="mb-0">&copy; 2026 Kartik Jha. All Rights Reserved.</p>
-            </div>
-    </footer>
-
-    <div class="modal fade" id="project1Modal" tabindex="-1" aria-labelledby="project1ModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="project1ModalLabel">EliteBandhan Website</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Goal:</strong> To modernize the company's official website.</p>
-                    <p><strong>My Role:</strong> I was the primary web developer responsible for the design,
-                        development, and deployment.</p>
-                    <div>
-                        <strong>Technologies:</strong><br>
-                        <span class="tech-badge">HTML</span>
-                        <span class="tech-badge">CSS</span>
-                        <span class="tech-badge">JavaScript</span>
-                        <span class="tech-badge">Bootstrap</span>
-                        <span class="tech-badge">Php</span>
-                        <span class="tech-badge">Sql</span>
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="http://elitebandhan.com" class="btn btn-custom" target="_blank">View Live</a>
-                    <button type="button" class="btn btn-close-custom" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
+    <div class="tl-item reveal">
+      <div class="tl-date">Feb 2026<br/>→ Present</div>
+      <div class="tl-body">
+        <div class="tl-company">LazyWorkz</div>
+        <div class="tl-role">WEB DEVELOPER — ON-SITE</div>
+        <ul class="tl-bullets">
+          <li>Worked on frontend development and bug fixing for multiple websites.</li>
+          <li>Improved UI responsiveness, page layouts, and performance.</li>
+          <li>Collaborated with team members to implement and refine web features.</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="modal fade" id="project2Modal" tabindex="-1" aria-labelledby="project2ModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="project2ModalLabel">Weather Web</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Goal:</strong> To build a functional and visually dynamic weather application.</p>
-                    <p><strong>My Role:</strong> I handled the entire development process, from fetching API data to UI.
-                    </p>
-                    <div>
-                        <strong>Technologies:</strong><br>
-                        <span class="tech-badge">HTML</span>
-                        <span class="tech-badge">CSS</span>
-                        <span class="tech-badge">JavaScript</span>
-                        <span class="tech-badge">Weather API</span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="https://k685819.github.io/weatherr/" class="btn btn-custom" target="_blank">View
-                        Live</a>
-                    <button type="button" class="btn btn-close-custom" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── PROJECTS ── -->
+<section id="projects" style="background:var(--surface)">
+  <p class="section-label reveal">// 03 — PROJECTS</p>
+  <h2 class="section-title reveal">Selected <span>Work</span></h2>
+  <div class="projects-grid">
+
+    <div class="proj-card reveal" style="--d:.05s">
+      <div class="proj-num">PROJECT 01</div>
+      <div class="proj-name">Sangam Vivah</div>
+      <div class="proj-year">Matrimonial Platform · 2026</div>
+      <ul class="proj-desc">
+        <li>Developed dynamic caste and NRI country pages for matrimonial services.</li>
+        <li>Implemented SEO-friendly page structures and optimized website performance.</li>
+        <li>Created contact forms, pricing pages, and structured content sections for better UX.</li>
+      </ul>
     </div>
 
-    <div class="modal fade" id="project3Modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">My Portfolio</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Goal:</strong> Create a Animated Portfolio For showing My Skill </p>
-                    <p><strong>Features:</strong>Animated Hero Section Along With JavaScript Funtionalties</p>
-                    <!-- <div>
-                        <strong>Category:</strong> Ecommerce<br>
-                    </div> -->
-                </div>
-                <div class="modal-footer">
-                    <a href="#" target="_blank" class="btn btn-custom">View Live</a>
-                    <button type="button" class="btn btn-close-custom" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
+    <div class="proj-card reveal" style="--d:.15s">
+      <div class="proj-num">PROJECT 02</div>
+      <div class="proj-name">Smart FAQ Chatbot</div>
+      <div class="proj-year">JavaScript · 2026</div>
+      <ul class="proj-desc">
+        <li>Built an intelligent FAQ chatbot using JavaScript for handling website user queries.</li>
+        <li>Implemented keyword detection, fuzzy matching, and typo handling for better accuracy.</li>
+        <li>Improved basic query automation and user interaction flow on the website.</li>
+      </ul>
     </div>
 
-     <div class="modal fade" id="project4Modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Stryd-Shoes Store</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Goal:</strong> A digital resume to showcase skills and experience.</p>
-                    <p><strong>Features:</strong> Smooth scrolling, brutalist design, and contact form integration.</p>
-                    <strong>Technologies:</strong><br>
-                        <span class="tech-badge">HTML</span>
-                        <span class="tech-badge">CSS</span>
-                        <span class="tech-badge">JavaScript</span>
-                        <span class="tech-badge">Bootstrap</span>
-                </div>
-                <div class="modal-footer">
-                    <a href="https://k685819.github.io/myfirstgitrepo/" target="_blank" class="btn btn-custom">View
-                        Live</a>
-                    <button type="button" class="btn btn-close-custom" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div> 
+  </div>
+</section>
 
-    <!-- <div class="modal fade" id="project5Modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Mrs Cutlery</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Goal:</strong> A digital catalog for a premium cutlery brand.</p>
-                    <p><strong>Focus:</strong> High-quality imagery, elegant typography, and brand storytelling.</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="https://mrscutlery.vercel.app/" target="_blank" class="btn btn-custom">View Live</a>
-                    <button type="button" class="btn btn-close-custom" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
+<hr class="divider"/>
+
+<!-- ── EDUCATION ── -->
+<section id="education">
+  <p class="section-label reveal">// 04 — EDUCATION</p>
+  <h2 class="section-title reveal">Academic <span>Background</span></h2>
+  <div class="edu-grid">
+
+    <div class="edu-card reveal" style="--d:.05s">
+      <div class="edu-badge">2024 – PRESENT</div>
+      <div class="edu-inst">University of Delhi — DU SOL</div>
+      <div class="edu-degree">Bachelor of Arts (BA), Pursuing · New Delhi, India</div>
     </div>
 
-    <div class="modal fade" id="project6Modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Namo Production</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Goal:</strong> Corporate profile for a video production house.</p>
-                    <p><strong>Features:</strong> Portfolio gallery, service listing, and client testimonials.</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="https://lazyboyharsh.github.io/namo-production/index.html" target="_blank"
-                        class="btn btn-custom">View Live</a>
-                    <button type="button" class="btn btn-close-custom" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>  -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <div class="edu-card reveal" style="--d:.15s">
+      <div class="edu-badge">COMPLETED</div>
+      <div class="edu-inst">Syntex World</div>
+      <div class="edu-degree">Web Development Course</div>
+      <ul class="edu-points">
+        <li>Fundamentals of HTML, CSS, and JavaScript; responsive layouts and forms.</li>
+        <li>PHP &amp; MySQL for backend development and database connectivity.</li>
+        <li>Website hosting concepts, debugging, and project-based workflow.</li>
+      </ul>
+    </div>
 
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-text reveal">
+      <p class="section-label">// 05 — CONTACT</p>
+      <h2>Let's <em>Build<br/>Together.</em></h2>
+      <p style="margin-top:18px">Open to new opportunities, freelance projects, and interesting collaborations. Drop me a line — I typically respond within 24 hours.</p>
+    </div>
+    <div class="contact-links reveal" style="--d:.15s">
+      <a href="mailto:kartikkumar3726@gmail.com" class="c-link">
+        <div class="c-icon">@</div>
+        <div class="c-info">
+          <div class="label">EMAIL</div>
+          <div class="value">kartikkumar3726@gmail.com</div>
+        </div>
+      </a>
+      <a href="tel:6205157377" class="c-link">
+        <div class="c-icon">☏</div>
+        <div class="c-info">
+          <div class="label">PHONE</div>
+          <div class="value">+91 6205157377</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/kartik-kumar-64643a319" target="_blank" rel="noopener" class="c-link">
+        <div class="c-icon">in</div>
+        <div class="c-info">
+          <div class="label">LINKEDIN</div>
+          <div class="value">kartik-kumar-64643a319</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="foot-logo">KK<span>.</span></div>
+  <p>KARTIK KUMAR — WEB DEVELOPER · NEW DELHI, INDIA</p>
+  <p>© 2026 — ALL RIGHTS RESERVED</p>
+</footer>
+
+<script>
+/* ── NAV SCROLL ── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.style.background=window.scrollY>40?'rgba(13,15,14,0.96)':'rgba(13,15,14,0.82)',{passive:true});
+
+/* ── HAMBURGER ── */
+const ham=document.getElementById('hamburger');
+const mob=document.getElementById('mobileMenu');
+ham.addEventListener('click',()=>mob.classList.toggle('open'));
+function closeMob(){mob.classList.remove('open')}
+
+/* ── SCROLL REVEAL ── */
+const reveals=document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const d=parseFloat(getComputedStyle(e.target).getPropertyValue('--d')||0)*1000;
+        setTimeout(()=>e.target.classList.add('show'),d);
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+  reveals.forEach(el=>io.observe(el));
+} else {
+  reveals.forEach(el=>el.classList.add('show'));
+}
+
+/* ── ACTIVE NAV HIGHLIGHT ── */
+const sections=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id});
+  links.forEach(l=>{
+    l.style.color=l.getAttribute('href')==='#'+cur?'var(--accent)':'';
+    l.style.borderColor=l.getAttribute('href')==='#'+cur?'rgba(57,255,143,.25)':'';
+  });
+},{passive:true});
+</script>
 </body>
-
 </html>
-
