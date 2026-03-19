@@ -195,7 +195,7 @@ nav{
   -webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 2px),#000 0);
   opacity:.5;
 }
-@keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+/* @keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}} */
 .avatar-inner{
   position:absolute;inset:8px;border-radius:50%;
   background:linear-gradient(135deg,#1a2520,#0d1710);
@@ -460,6 +460,14 @@ footer p{font-family:var(--f-mono);font-size:.65rem;color:var(--muted);letter-sp
   .avatar-ring{width:140px;height:140px}
   .avatar-initials{font-size:2.4rem}
 }
+.nav-logo img.logo-img {
+  height: 180px;
+  width: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
 </style>
 </head>
 <body>
@@ -505,11 +513,11 @@ footer p{font-family:var(--f-mono);font-size:.65rem;color:var(--muted);letter-sp
       </div>
     </div>
     <div class="hero-visual">
-      <div class="avatar-ring">
-        <div class="avatar-inner">
-          <span class="avatar-initials">KK</span>
-        </div>
-      </div>
+      
+        <div class="nav-logo">
+  <img src="profile.jpg" alt="Profile" class="logo-img">
+</div>
+      
       <div class="stat-chips">
         <div class="s-chip"><div class="n">2+</div><span class="l">ROLES</span></div>
         <div class="s-chip"><div class="n">2</div><span class="l">PROJECTS</span></div>
